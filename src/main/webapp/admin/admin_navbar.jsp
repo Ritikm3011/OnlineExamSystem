@@ -10,19 +10,18 @@
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="index.jsp">Home</a></li>
+					aria-current="page" href="admin_home.jsp">Home</a></li>
 
 				<li class="nav-item dropdown "><a
 					class="nav-link dropdown-toggle active" href="#" id="navbarDropdown"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Login </a>
+						Admin </a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<li><a class="dropdown-item" href="#">Student</a></li>
-						<li><a class="dropdown-item" href="admin_login.jsp">Admin</a></li>
+						<li><a class="dropdown-item" href="../AdminLogoutServlet">Log Out</a></li>
+				
 						
 					</ul></li>
-				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="student_signup.jsp">Sign Up</a></li>
+				
 			</ul>
 
 		</div>
