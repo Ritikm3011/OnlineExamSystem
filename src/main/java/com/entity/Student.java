@@ -13,7 +13,7 @@ public class Student {
 	private String name;
 	private String email;
 	private String phone;
-	private String DOB;
+	private String dob;
 	private String gender;
 	private String password;
 	private String securityQuestion;
@@ -21,7 +21,49 @@ public class Student {
 	private int active;
 	private String address;
 	private String enrollmentDate;
-	private String lastLoging;
+	private String lastLogin;
+	
+	public Student() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	public Student(int studentId, String name, String email, String phone, String dob, String gender, String password,
+			String securityQuestion, String securityAnswer, int active, String address, String enrollmentDate,
+			String lastLogin) {
+		super();
+		this.studentId = studentId;
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.dob = dob;
+		this.gender = gender;
+		this.password = password;
+		this.securityQuestion = securityQuestion;
+		this.securityAnswer = securityAnswer;
+		this.active = active;
+		this.address = address;
+		this.enrollmentDate = enrollmentDate;
+		this.lastLogin = lastLogin;
+	}
+
+	public Student(String name, String email, String phone, String dob, String gender, String password,
+			String securityQuestion, String securityAnswer, int active, String address, String enrollmentDate,
+			String lastLogin) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.phone = phone;
+		this.dob = dob;
+		this.gender = gender;
+		this.password = password;
+		this.securityQuestion = securityQuestion;
+		this.securityAnswer = securityAnswer;
+		this.active = active;
+		this.address = address;
+		this.enrollmentDate = enrollmentDate;
+		this.lastLogin = lastLogin;
+	}
 
 	public int getStudentId() {
 		return studentId;
@@ -55,12 +97,12 @@ public class Student {
 		this.phone = phone;
 	}
 
-	public String getDOB() {
-		return DOB;
+	public String getDob() {
+		return dob;
 	}
 
-	public void setDOB(String dOB) {
-		DOB = dOB;
+	public void setDob(String dob) {
+		this.dob = dob;
 	}
 
 	public String getGender() {
@@ -119,54 +161,15 @@ public class Student {
 		this.enrollmentDate = enrollmentDate;
 	}
 
-	public String getLastLoging() {
-		return lastLoging;
+	public String getlastLogin() {
+		return lastLogin;
 	}
 
-	public void setLastLoging(String lastLoging) {
-		this.lastLoging = lastLoging;
+	public void setlastLogin(String lastLogin) {
+		this.lastLogin = lastLogin;
 	}
 
-	public Student() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
-	public Student(String name, String email, String phone, String dOB, String gender, String password,
-			String securityQuestion, String securityAnswer, int active, String address, String enrollmentDate,
-			String lastLoging) {
-		super();
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		DOB = dOB;
-		this.gender = gender;
-		this.password = password;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.active = active;
-		this.address = address;
-		this.enrollmentDate = enrollmentDate;
-		this.lastLoging = lastLoging;
-	}
-
-	public Student(int studentId, String name, String email, String phone, String dOB, String gender, String password,
-			String securityQuestion, String securityAnswer, int active, String address, String enrollmentDate,
-			String lastLoging) {
-		super();
-		this.studentId = studentId;
-		this.name = name;
-		this.email = email;
-		this.phone = phone;
-		DOB = dOB;
-		this.gender = gender;
-		this.password = password;
-		this.securityQuestion = securityQuestion;
-		this.securityAnswer = securityAnswer;
-		this.active = active;
-		this.address = address;
-		this.enrollmentDate = enrollmentDate;
-		this.lastLoging = lastLoging;
-	}
+	
+	
 
 }

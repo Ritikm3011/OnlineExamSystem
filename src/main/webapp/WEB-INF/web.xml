@@ -28,6 +28,12 @@
   	<description></description>
   	<servlet-class>com.student.servlet.StudentLoginServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>StudentSignupServlet</servlet-name>
+  	<display-name>StudentSignupServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.student.servlet.StudentSignupServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AdminLogin</servlet-name>
   	<url-pattern>/AdminLogin</url-pattern>
@@ -43,5 +49,9 @@
   <servlet-mapping>
   	<servlet-name>StudentLoginServlet</servlet-name>
   	<url-pattern>/StudentLoginServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>StudentSignupServlet</servlet-name>
+  	<url-pattern>/StudentSignupServlet</url-pattern>
   </servlet-mapping>
 </web-app>

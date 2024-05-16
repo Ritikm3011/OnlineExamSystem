@@ -33,7 +33,7 @@
 					</div>
 
 					<div class="card-body">
-						<form action="StudentLoginServlet" method="post">
+						<form action="StudentSignupServlet" method="post">
 
 
 							<div class="mb-3">
@@ -52,8 +52,8 @@
 							</div>
 
 							<div class="mb-3">
-								<label class="form-label">Phone No.</label> <input
-									class="form-control" name="dob" type="text">
+								<label class="form-label">Date Of Birth </label> <input
+									class="form-control" name="dob" type="date">
 							</div>
 							<div class="mb-3">
 								<label class="form-label">Gender</label> <select required
@@ -75,12 +75,18 @@
 								<label class="form-label">Security Question</label> <select
 									required class="form-control" name="security_question">
 									<option disabled selected>---select---</option>
-									<option value="q1">In what city were you born?</option>
-									<option value="q2">What year was your father (or
-										mother) born?</option>
-									<option value="q3">What is your mother's maiden name?</option>
-									<option value="q4">What was your favorite food as a
-										child?</option>
+									<option value="In what city were you born?">In what
+										city were you born?</option>
+									<option
+										value="What year was your father (or
+										mother) born?">What
+										year was your father (or mother) born?</option>
+									<option value="What is your mother's maiden name?">What
+										is your mother's maiden name?</option>
+									<option
+										value="What was your favorite food as a
+										child?">What
+										was your favorite food as a child?</option>
 								</select>
 							</div>
 
@@ -94,8 +100,8 @@
 								<label class="form-label">Address</label> <input
 									class="form-control" name="address" type="text">
 							</div>
-							
-							
+
+
 
 							<div class="text-center pt-4">
 								<button class="btn btn-success col-md-10">Sign Up</button>
