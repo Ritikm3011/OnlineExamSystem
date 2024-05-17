@@ -15,7 +15,7 @@
 				<li class="nav-item dropdown "><a
 					class="nav-link dropdown-toggle active" href="#" id="navbarDropdown"
 					role="button" data-bs-toggle="dropdown" aria-expanded="false">
-						Admin </a>
+						${adminObj.name} </a>
 					<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<li><a class="dropdown-item" href="../AdminLogoutServlet">Log Out</a></li>
 				
