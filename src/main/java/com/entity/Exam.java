@@ -89,7 +89,7 @@ public class Exam {
 		this.instructions = instructions;
 	}
 
-	public double isPositiveMarks() {
+	public double getPositiveMarks() {
 		return positiveMarks;
 	}
 
@@ -97,7 +97,7 @@ public class Exam {
 		this.positiveMarks = positiveMarks;
 	}
 
-	public double isNegativeMarks() {
+	public double getNegativeMarks() {
 		return negativeMarks;
 	}
 
@@ -140,5 +140,7 @@ public class Exam {
 	public int getExamId() {
 		return examId;
 	}
+
+	
 
 }

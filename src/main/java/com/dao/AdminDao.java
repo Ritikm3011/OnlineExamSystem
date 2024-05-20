@@ -1,8 +1,11 @@
 package com.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 
 import com.entity.Exam;
 
@@ -38,4 +41,22 @@ public class AdminDao {
 		
 		return f;
 	}
+	
+	public List<Exam> getAllExam() {
+		List<Exam> examList = null;
+		
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Exam");
+			
+			examList = query.list();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.getAllExam");
+		}
+		
+		return examList;
+	}
+	
 }

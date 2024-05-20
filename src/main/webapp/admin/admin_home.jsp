@@ -67,7 +67,7 @@
 			</div>
 
 			<div class="col-md-4">
-				<a href="#" class="text-decoration-none">
+				<a href="view_exam.jsp" class="text-decoration-none">
 					<div class="card ">
 						<div class="card-body text-center text-success ">
 							<h5 class="text-center display-5">Total Exam</h5>

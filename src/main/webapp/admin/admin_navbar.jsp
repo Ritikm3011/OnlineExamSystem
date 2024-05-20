@@ -13,7 +13,7 @@
 					aria-current="page" href="admin_home.jsp">Home</a></li>
 					
 				<li class="nav-item"><a class="nav-link active"
-					aria-current="page" href="exam.jsp">Exam</a></li>
+					aria-current="page" href="view_exam.jsp">Exams</a></li>
 					
 					
 				<li class="nav-item"><a class="nav-link active"
