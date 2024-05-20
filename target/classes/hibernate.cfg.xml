@@ -13,11 +13,14 @@
 		<property name="connection.password">Asdfghjkl12.</property>
 
 		<property name="dialect">org.hibernate.dialect.MySQL8Dialect</property>
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		<property name="show_sql">true</property>
 		<property name="format_sql">true</property>
 		
 		<mapping class="com.entity.Student"/>
+		<mapping class="com.entity.Exam"/>
+		<mapping class="com.entity.Question"/>
+	
 		
 	
 

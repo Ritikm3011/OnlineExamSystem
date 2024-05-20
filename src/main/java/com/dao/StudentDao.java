@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -52,6 +54,25 @@ public class StudentDao {
 			System.out.println("problem in StudentDao.login");
 		}
 		return student;
+	}
+	
+	
+	public List<Student> getAllStudent() {
+		List<Student> studentList = null;
+		
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Student");
+			
+			studentList = query.list();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in StudentDao.allStudent");
+		}
+		
+		return studentList;
+		
 	}
 
 }

@@ -11,6 +11,13 @@
 			<ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="admin_home.jsp">Home</a></li>
+					
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="page" href="exam.jsp">Exam</a></li>
+					
+					
+				<li class="nav-item"><a class="nav-link active"
+					aria-current="page" href="view_students.jsp">Students</a></li>
 
 				<li class="nav-item dropdown "><a
 					class="nav-link dropdown-toggle active" href="#" id="navbarDropdown"

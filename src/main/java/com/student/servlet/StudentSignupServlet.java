@@ -57,7 +57,7 @@ public class StudentSignupServlet extends HttpServlet {
 
 		if (dao.signUp(student)) {
 			session.setAttribute("successMsg", "Register Successfully");
-			response.sendRedirect("student_signup.jsp");
+			response.sendRedirect("student_login.jsp");
 
 		} else {
 			session.setAttribute("failMsg", "Someting went wrong");
