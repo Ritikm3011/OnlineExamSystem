@@ -59,7 +59,7 @@
 				<a href="view_students.jsp" class="text-decoration-none">
 					<div class="card">
 						<div class="card-body text-center text-success ">
-							<h5 class="text-center display-5">Total Students</h5>
+							<h5 class="text-center display-5">All Students</h5>
 							<h4>xx</h4>
 						</div>
 					</div>
@@ -70,7 +70,7 @@
 				<a href="view_exam.jsp" class="text-decoration-none">
 					<div class="card ">
 						<div class="card-body text-center text-success ">
-							<h5 class="text-center display-5">Total Exam</h5>
+							<h5 class="text-center display-5">All Exam</h5>
 							<h4>xx</h4>
 						</div>
 					</div>

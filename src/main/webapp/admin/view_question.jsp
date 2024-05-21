@@ -1,4 +1,5 @@
 
+<%@page import="com.entity.Question"%>
 <%@page import="com.entity.Exam"%>
 <%@page import="com.dao.AdminDao"%>
 <%@page import="com.entity.Student"%>
@@ -15,20 +16,20 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>All Questions</title>
 
 <%@include file="../component/all_css_js.jsp"%>
 </head>
 <body>
 	<%@include file="admin_navbar.jsp"%>
 
-	<!-- all Students List -->
+	<!-- all Questions List -->
 	<div class="container-fluid p-3">
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card border-secondary shadow-lg">
 					<div class="card-header">
-						<h1 class="display-5 text-center">Exam Details</h1>
+						<h1 class="display-5 text-center">Questions</h1>
 						<c:if test="${not empty successMsg}">
 							<p class="text-center text-success ">${successMsg}</p>
 							<c:remove var="successMsg" scope="session" />
@@ -46,52 +47,54 @@
 							<thead>
 								<tr>
 									<th scope="col">#</th>
-									<th scope="col">Name</th>
-									<th scope="col">Positive Marks</th>
-									<th scope="col">Negative Marks</th>
-									<th scope="col">Duration</th>
+									<th scope="col">Question</th>
+									<th scope="col">Option 1</th>
+									<th scope="col">Option 2</th>
+									<th scope="col">Option 3</th>
 
 
 
-									<th scope="col">Created At</th>
-									<th scope="col">Total Questions</th>
+									<th scope="col">Option 4</th>
+									<th scope="col">Correct Option</th>
+									<th scope="col">Actions</th>
 
-									<th scope="col">Status</th>
-									<th scope="col">Action</th>
+									
 
 								</tr>
 							</thead>
 							<tbody>
 								<%
-								StudentDao stdDao = new StudentDao(FactoryProvider.getSessionFactory());
-
+								String exam_id = request.getParameter("exam_id");
+								int examId = Integer.parseInt(exam_id);
 								AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
-								List<Exam> list = dao.getAllExam();
+								List<Question> list = dao.getQuestionByExamId(examId);
 
 								int i = 0;
-								for (Exam exam : list) {
+								for (Question question : list) {
 									i++;
 								%>
 								<tr>
 									<th scope="row"><%=i%></th>
-									<td><%=exam.getName()%></td>
-									<td><%=exam.getPositiveMarks()%></td>
-									<td><%=exam.getNegativeMarks()%></td>
-									<td><%=exam.getDuration()%></td>
-									<td><%=exam.getCreationTimestamp()%></td>
-									<td><%=dao.getTotalQuestionByExamId(exam.getExamId())%></td>
-									<td><%=exam.getActive()%></td>
-									<td><a href="exam_actions.jsp?exam_id=<%=exam.getExamId() %>" type="button"
-										class="btn btn-outline-success btn-sm">View</a> 
-										<a href="#"
+									<td><%=question.getQuestion()%></td>
+									
+									<td><%=question.getOption1() %></td>
+									<td><%=question.getOption2() %></td>
+									<td><%=question.getOption3() %></td>
+									<td><%=question.getOption4() %></td>
+									<td><%=question.getCorrectAnswer() %></td>
+									
+									<td><a href="#" type="button"
+										class="btn btn-outline-success btn-sm">View</a> <a href="#"
 										type="button" class="btn btn-outline-info btn-sm">Edit</a> <a
-										href="../DeleteExamServlet?exam_id=<%=exam.getExamId()%>"
+										href="../DeleteExamServlet?exam_id=<%=question.getQuestionId()%>"
 										type="button" class="btn btn-outline-danger btn-sm">Delete</a>
 									</td>
 								</tr>
 								<%
 								}
 								%>
+								
+								
 							</tbody>
 						</table>
 

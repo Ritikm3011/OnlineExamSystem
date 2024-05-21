@@ -52,6 +52,12 @@
   	<description></description>
   	<servlet-class>com.admin.servlet.AddQuestionServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>DeleteExamServlet</servlet-name>
+  	<display-name>DeleteExamServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.admin.servlet.DeleteExamServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AdminLogin</servlet-name>
   	<url-pattern>/AdminLogin</url-pattern>
@@ -83,5 +89,9 @@
   <servlet-mapping>
   	<servlet-name>AddQuestionServlet</servlet-name>
   	<url-pattern>/AddQuestionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>DeleteExamServlet</servlet-name>
+  	<url-pattern>/DeleteExamServlet</url-pattern>
   </servlet-mapping>
 </web-app>

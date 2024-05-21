@@ -24,7 +24,7 @@
 	Exam exam = dao.getExamById(examId);
 	String name = exam.getName();
 	%>
-
+       
 	<button type="button" class="btn btn-warning m-2">
 		Exam Id :
 		<%=exam_id%></button>
