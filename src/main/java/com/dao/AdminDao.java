@@ -8,6 +8,7 @@ import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
 import com.entity.Exam;
+import com.entity.Question;
 
 public class AdminDao {
 	private SessionFactory factory;
@@ -58,5 +59,48 @@ public class AdminDao {
 		
 		return examList;
 	}
+	
+	public Exam getExamById(int examId) {
+		Exam exam = null;
+		
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Exam where examId=:id");
+			query.setParameter("id", examId);
+			exam =(Exam) query.uniqueResult();
+//			System.out.println(exam.getName());
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.getExamById");
+		}
+		
+		return exam;
+	}
+	
+	
+	
+public boolean addQuestion(Question question) {
+		
+		boolean f = false;
+		
+		try {
+			session = factory.openSession();
+			txn = session.beginTransaction();
+
+			session.save(question);
+			txn.commit();
+			f = true;
+			session.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.addQuestion");
+		}
+		
+		
+		return f;
+	}
+	
 	
 }

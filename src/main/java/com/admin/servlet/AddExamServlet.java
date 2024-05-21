@@ -50,9 +50,10 @@ public class AddExamServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		if(dao.addExam(exam)) {
+			int examId = exam.getExamId();
 		
 			session.setAttribute("successMsg", "New Exam Added Successfully");
-			response.sendRedirect("admin/exam_actions.jsp");
+			response.sendRedirect("admin/exam_actions.jsp?exam_id="+examId);
 		} else {
 			session.setAttribute("failMsg", "Something went wrong");
 			response.sendRedirect("admin/add_exam.jsp");
