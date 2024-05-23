@@ -28,7 +28,7 @@ public class DeleteExamServlet extends HttpServlet {
 			session.setAttribute("successMsg", "Exam Deleted Successfully");
 			response.sendRedirect("admin/view_exam.jsp");
 		} else {
-			session.setAttribute("failMsg", "Something went wrong");
+			session.setAttribute("failMsg", "Exam contain questions can't be deleted");
 			response.sendRedirect("admin/view_exam.jsp");
 		}
 

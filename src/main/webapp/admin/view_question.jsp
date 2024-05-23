@@ -86,7 +86,7 @@
 									<td><a href="#" type="button"
 										class="btn btn-outline-success btn-sm">View</a> <a href="#"
 										type="button" class="btn btn-outline-info btn-sm">Edit</a> <a
-										href="../DeleteExamServlet?exam_id=<%=question.getQuestionId()%>"
+										href="../DeleteQuestionServlet?question_id=<%=question.getQuestionId()%>"
 										type="button" class="btn btn-outline-danger btn-sm">Delete</a>
 									</td>
 								</tr>

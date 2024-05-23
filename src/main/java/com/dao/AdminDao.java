@@ -65,15 +65,14 @@ public class AdminDao {
 
 		return count;
 	}
-	
-	
+
 	public List<Exam> getActiveExam() {
 		List<Exam> examList = null;
 
 		try {
 			session = factory.openSession();
 			Query query = session.createQuery("from Exam where active=:ac");
-			query.setParameter("ac","Active");
+			query.setParameter("ac", "Active");
 
 			examList = query.list();
 
@@ -84,8 +83,7 @@ public class AdminDao {
 
 		return examList;
 	}
-	
-	
+
 	public int totalActiveExam() {
 		int count = 0;
 		List<Exam> examList = getActiveExam();
@@ -155,6 +153,28 @@ public class AdminDao {
 		return f;
 	}
 
+	public boolean deleteQuestionById(int questionId) {
+		boolean f = false;
+		try {
+			session = factory.openSession();
+			txn = session.beginTransaction();
+
+			Query query = session.createQuery("delete from Question where questionId=:id");
+			query.setParameter("id", questionId);
+			int status = query.executeUpdate();
+			txn.commit();
+			if (status == 1) {
+				f = true;
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.deleteQuestionById");
+		}
+
+		return f;
+	}
+
 	public List<Question> getQuestionByExamId(int examId) {
 		List<Question> list = null;
 		try {
@@ -169,6 +189,23 @@ public class AdminDao {
 		}
 
 		return list;
+	}
+
+	public int getExamIdByQuestionId(int questionId) {
+		int id = 0;
+
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("SELECT q.exam.examId FROM Question q WHERE q.questionId = :id");
+			query.setParameter("id", questionId);
+			id = (int) query.uniqueResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.getExamIdByQuestionId");
+		}
+
+		return id;
 	}
 
 	public int getTotalQuestionByExamId(int examId) {
