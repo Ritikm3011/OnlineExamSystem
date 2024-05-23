@@ -28,30 +28,26 @@ public class EditExamServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-//		doGet(request, response);
-
-		String exam_id = request.getParameter("exam_id");
+		// doGet(request, response);
+		int examId = Integer.parseInt(request.getParameter("exam_id"));
 		String name = request.getParameter("exam_name");
 		String instructions = request.getParameter("instructions");
-		String positive_marks = request.getParameter("positive_marks");
-		String negative_marks = request.getParameter("negative_marks");
+		double positiveMarks = Convert.getDouble(request.getParameter("positive_marks"));
+		double negativeMarks = Convert.getDouble(request.getParameter("negative_marks"));
 		String duration = request.getParameter("duration");
 		String active = request.getParameter("status");
 
-		int examId = Integer.parseInt(exam_id);
-		double positiveMarks = Convert.getDouble(positive_marks);
-		
-		double negativeMarks = Convert.getDouble(negative_marks);
-		
-
 		HttpSession session = request.getSession();
-
 		AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
-
-		int f = dao.editExam(1, "Test", "Test", 5.0, 0.0, "30", "active");
-		response.getWriter().print(f);
-		response.getWriter().print("<br>");
-		response.getWriter().print(positiveMarks);
+		boolean f = dao.editExam(examId, name, instructions, positiveMarks, negativeMarks, duration, active);
+		
+		if (f) {
+			session.setAttribute("successMsg", "Exam Details Updated Successfully.");
+			response.sendRedirect("admin/view_exam.jsp");
+		} else {
+			session.setAttribute("failMsg", "Something went wrong");
+			response.sendRedirect("admin/view_exam.jsp");
+		}
 
 	}
 

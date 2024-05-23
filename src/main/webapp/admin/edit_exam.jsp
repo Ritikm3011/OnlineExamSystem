@@ -31,7 +31,7 @@
 	AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
 	Exam exam = dao.getExamById(examId);
 	%>
-
+<a class="btn btn-primary m-2">Exam ID : <%=exam.getExamId() %></a>
 	<div class="container my-3 py-3">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">

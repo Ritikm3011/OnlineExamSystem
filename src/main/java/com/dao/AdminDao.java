@@ -226,34 +226,41 @@ public class AdminDao {
 
 		return count;
 	}
-
-	public int editExam(int examId, String name, String instructions, double positiveMarks, double negativeMarks,
-			String duration, String active) {
-		int status = 10;
+	
+	
+	public boolean editExam(int examId, String name, String instructions, double positiveMarks, double negativeMarks, String duration, String active) {
+		boolean f = false;
 		try {
+			
 			session = factory.openSession();
 			txn = session.beginTransaction();
-			Query query = session.createQuery(
-					"update Exam e set e.name=: nm, e.instructions=: ins, e.positiveMarks=: pm, e.negativeMarks=: nm, e.duration=: du, e.active=: ac where e.examId=: id");
-			query.setParameter("nm", name);
-			query.setParameter("ins", instructions);
-			query.setParameter("pm", positiveMarks);
-			query.setParameter("nm", negativeMarks);
-			query.setParameter("du", duration);
-			query.setParameter("ac", active);
-			query.setParameter("id", examId);
-
-			status = query.executeUpdate();
-			txn.commit();
-			System.out.println(status);
-
+			
+			String hql = "UPDATE Exam e SET e.name = :name, e.instructions = :instructions, e.positiveMarks = :positiveMarks, e.negativeMarks = :negativeMarks, e.duration = :duration, e.active = :active WHERE e.examId = :examId";
+	        Query query = session.createQuery(hql);
+	        
+	     // Set the parameters
+	        query.setParameter("name", name);
+	        query.setParameter("instructions", instructions);
+	        query.setParameter("positiveMarks", positiveMarks);
+	        query.setParameter("negativeMarks", negativeMarks);
+	        query.setParameter("duration", duration);
+	        query.setParameter("active", active);
+	        query.setParameter("examId", examId);
+	        
+	        int result = query.executeUpdate();
+	        System.out.println("row affected:" + result);
+	        txn.commit();
+	        
+			if(result == 1) {
+				f = true;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("problem in AdminDao.editExam");
-			System.out.println(status);
-
 		}
-		return status;
-
+		return f;
 	}
+	
+	
+
 }
