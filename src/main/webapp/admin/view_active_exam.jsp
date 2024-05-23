@@ -66,7 +66,7 @@
 								StudentDao stdDao = new StudentDao(FactoryProvider.getSessionFactory());
 
 								AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
-								List<Exam> list = dao.getAllExam();
+								List<Exam> list = dao.getActiveExam();
 
 								int i = 0;
 								for (Exam exam : list) {

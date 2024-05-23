@@ -1,4 +1,8 @@
 
+
+<%@page import="com.dao.StudentDao"%>
+<%@page import="com.db.FactoryProvider"%>
+<%@page import="com.dao.AdminDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -50,7 +54,13 @@
 			<c:remove var="failMsg" scope="session" />
 		</c:if>
 		<%
+		AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
+		int examCount = dao.totalExam();
+		int activeExamCount = dao.totalActiveExam();
 
+		StudentDao stdDao = new StudentDao(FactoryProvider.getSessionFactory());
+		int studentCount = stdDao.totalStudent();
+		int activeStudent = stdDao.totalActiveStudent();
 		%>
 
 		<div class="row">
@@ -60,7 +70,7 @@
 					<div class="card">
 						<div class="card-body text-center text-success ">
 							<h5 class="text-center display-5">All Students</h5>
-							<h4>xx</h4>
+							<h4><%=studentCount%></h4>
 						</div>
 					</div>
 				</a>
@@ -71,7 +81,7 @@
 					<div class="card ">
 						<div class="card-body text-center text-success ">
 							<h5 class="text-center display-5">All Exam</h5>
-							<h4>xx</h4>
+							<h4><%=examCount%></h4>
 						</div>
 					</div>
 				</a>
@@ -85,7 +95,7 @@
 
 							<h5 class="text-center display-5">Add Exam</h5>
 
-							<h4>xx</h4>
+							<h4>Create New Exam </h4>
 						</div>
 					</div>
 
@@ -96,25 +106,25 @@
 
 			<div class="col-md-4 mt-2" data-bs-toggle="modal"
 				data-bs-target="#exampleModal">
-				<a href="#" class="text-decoration-none">
+				<a href="view_active_students.jsp" class="text-decoration-none">
 					<div class="card ">
 						<div class="card-body text-center text-success ">
 							<h5 class="text-center display-5">Active Students</h5>
-							<h4>xxx</h4>
+							<h4><%=activeStudent%></h4>
 						</div>
 					</div>
 				</a>
 			</div>
-			
-			
-			
+
+
+
 			<div class="col-md-4 mt-2" data-bs-toggle="modal"
 				data-bs-target="#exampleModal">
-				<a href="#" class="text-decoration-none">
+				<a href="view_active_exam.jsp" class="text-decoration-none">
 					<div class="card ">
 						<div class="card-body text-center text-success ">
 							<h5 class="text-center display-5">Active Exam</h5>
-							<h4>xxx</h4>
+							<h4><%=activeExamCount%></h4>
 						</div>
 					</div>
 				</a>

@@ -58,6 +58,42 @@ public class AdminDao {
 		return examList;
 	}
 
+	public int totalExam() {
+		int count = 0;
+		List<Exam> examList = getAllExam();
+		count = examList.size();
+
+		return count;
+	}
+	
+	
+	public List<Exam> getActiveExam() {
+		List<Exam> examList = null;
+
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Exam where active=:ac");
+			query.setParameter("ac","Active");
+
+			examList = query.list();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.getAllExam");
+		}
+
+		return examList;
+	}
+	
+	
+	public int totalActiveExam() {
+		int count = 0;
+		List<Exam> examList = getActiveExam();
+		count = examList.size();
+
+		return count;
+	}
+
 	public Exam getExamById(int examId) {
 		Exam exam = null;
 
@@ -134,7 +170,7 @@ public class AdminDao {
 
 		return list;
 	}
-	
+
 	public int getTotalQuestionByExamId(int examId) {
 		int count = 0;
 		try {
@@ -142,15 +178,45 @@ public class AdminDao {
 //			Query query = session.createQuery("select count(Question) from Question  where exam.examId = :id", Integer.class);
 //			query.setParameter("id", examId);
 //			count =(int) query.uniqueResult();
-			
+
 			List<Question> list = getQuestionByExamId(examId);
 			count = list.size();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("problem in AdminDao.getTotalQuestionByExamId");
 		}
-		
+
 		return count;
+	}
+
+	public int editExam(int examId, String name, String instructions, double positiveMarks, double negativeMarks,
+			String duration, String active) {
+		int status = 10;
+		try {
+			session = factory.openSession();
+			txn = session.beginTransaction();
+			Query query = session.createQuery(
+					"update Exam e set e.name=: nm, e.instructions=: ins, e.positiveMarks=: pm, e.negativeMarks=: nm, e.duration=: du, e.active=: ac where e.examId=: id");
+			query.setParameter("nm", name);
+			query.setParameter("ins", instructions);
+			query.setParameter("pm", positiveMarks);
+			query.setParameter("nm", negativeMarks);
+			query.setParameter("du", duration);
+			query.setParameter("ac", active);
+			query.setParameter("id", examId);
+
+			status = query.executeUpdate();
+			txn.commit();
+			System.out.println(status);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in AdminDao.editExam");
+			System.out.println(status);
+
+		}
+		return status;
+
 	}
 }

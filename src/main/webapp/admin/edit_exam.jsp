@@ -1,4 +1,7 @@
 
+<%@page import="com.entity.Exam"%>
+<%@page import="com.db.FactoryProvider"%>
+<%@page import="com.dao.AdminDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,19 +15,29 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <%@include file="../component/all_css_js.jsp"%>
-<title>Create Exam</title>
+<title>Edit Exam</title>
 <%@include file="admin_navbar.jsp"%>
 
 
 </head>
 <body>
 
+
+	<%
+	
+
+	String exam_id = request.getParameter("exam_id");
+	int examId = Integer.parseInt(exam_id);
+	AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
+	Exam exam = dao.getExamById(examId);
+	%>
+
 	<div class="container my-3 py-3">
 		<div class="row">
 			<div class="col-md-6 offset-md-3">
 				<div class="card shadow-lg p-3 mb-5 bg-body rounded">
 					<div class="card-header">
-						<p class="text-center fs-3">Add New Exam</p>
+						<p class="text-center fs-3">Edit Exam</p>
 
 						<c:if test="${not empty successMsg}">
 							<p class="text-center text-success ">${successMsg}</p>
@@ -38,41 +51,44 @@
 					</div>
 
 					<div class="card-body">
-						<form action="../AddExamServlet" method="post">
-
+						<form action="../EditExamServlet" method="post">
+							<input value=<%=exam.getExamId()%> class="form-control"
+								name="exam_id" type="hidden">
 
 							<div class="mb-3">
 								<label class="form-label">Exam Name</label> <input
-									class="form-control" name="exam_name" type="text" placeholder="Don't use sapce">
+									value=<%=exam.getName()%> class="form-control" name="exam_name"
+									type="text">
 							</div>
 
 							<div class="mb-3">
 								<label class="form-label">Instructions</label>
 								<div class="form-floating">
-									<textarea  name="instructions" class="form-control" 
-										></textarea>
+									<textarea name="instructions" class="form-control"><%=exam.getInstructions()%></textarea>
 									<label for="floatingTextarea"></label>
 								</div>
 							</div>
 
 
 
-							
+
 							<div class="row g-3">
 								<div class="col">
 									<label class="form-label">Positive Marks</label> <input
-										type="number" class="form-control" value="4" name="positive_marks">
+										type="number" class="form-control"
+										value=<%=exam.getPositiveMarks()%> name="positive_marks">
 								</div>
 								<div class="col">
 									<label class="form-label">Negative Marks</label> <input
-										type="number" class="form-control"  value="1" name="negative_marks">
+										type="number" class="form-control"
+										value=<%=exam.getNegativeMarks()%> name="negative_marks">
 								</div>
 
 
 								<div class="col">
 									<label class="form-label">Exam Duration</label> <input
-										type="text" class="form-control" placeholder="In minute"
-										name="duration" >
+										value=<%=exam.getDuration()%> type="text" class="form-control"
+										placeholder="In minute" name="duration">
 								</div>
 
 							</div>
@@ -82,7 +98,7 @@
 							<div class="mb-3">
 								<label class="form-label">Status</label> <select required
 									class="form-control" name="status">
-									<option disabled selected>---select---</option>
+									<option disabled selected><%=exam.getActive()%></option>
 									<option value="Active">Active</option>
 									<option value="Inactive">Inactive</option>
 
@@ -93,7 +109,7 @@
 
 
 							<div class="text-center pt-4">
-								<button class="btn btn-success col-md-10">Add Exam</button>
+								<button class="btn btn-success col-md-10">Update Exam</button>
 							</div>
 
 

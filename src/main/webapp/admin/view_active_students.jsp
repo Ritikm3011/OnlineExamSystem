@@ -2,7 +2,8 @@
 <%@page import="com.entity.Student"%>
 <%@page import="java.util.List"%>
 <%@page import="com.db.FactoryProvider"%>
-<%@page import="org.hibernate.engine.jdbc.connections.spi.ConnectionProvider"%>
+<%@page
+	import="org.hibernate.engine.jdbc.connections.spi.ConnectionProvider"%>
 <%@page import="com.dao.StudentDao"%>
 
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -40,32 +41,28 @@
 									<th scope="col">Phone No.</th>
 									<th scope="col">Gender</th>
 									<th scope="col">D.O.B</th>
-								
-									
+
+
 									<th scope="col">Enrollment Date</th>
 									<th scope="col">Last Login</th>
 									<th scope="col">Status</th>
-									
+
 								</tr>
 							</thead>
 							<tbody>
 								<%
-								
-							
 								StudentDao stdDao = new StudentDao(FactoryProvider.getSessionFactory());
-								List<Student> list = stdDao.getAllStudent();
+								List<Student> list = stdDao.getActiveStudent();
 
-								
 								int i = 0;
 								for (Student student : list) {
 									i++;
-								String status = "";
-								if(student.getActive()==0) {
-									status = "Inactive";
-								}else {
-									status = "Active";
-								}
-									
+									String status = "";
+									if (student.getActive() == 0) {
+										status = "Inactive";
+									} else {
+										status = "Active";
+									}
 								%>
 								<tr>
 									<th scope="row"><%=i%></th>
@@ -76,9 +73,9 @@
 									<td><%=student.getDob()%></td>
 									<td><%=student.getEnrollmentDate()%></td>
 									<td><%=student.getlastLogin()%></td>
-									<td><%=status %></td>
-									
-									
+									<td><%=status%></td>
+
+
 
 
 

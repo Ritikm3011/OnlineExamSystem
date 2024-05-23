@@ -74,5 +74,40 @@ public class StudentDao {
 		return studentList;
 		
 	}
+	
+	public int totalStudent() {
+		int count = 0;
+		List<Student> std = getAllStudent();
+		count = std.size();
+		
+		return count;
+	}
+	
+	
+	public List<Student> getActiveStudent() {
+		List<Student> studentList = null;
+		
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Student where active=1");
+			
+			studentList = query.list();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in StudentDao.allStudent");
+		}
+		
+		return studentList;
+		
+	}
+	
+	public int totalActiveStudent() {
+		int count = 0;
+		List<Student> std = getActiveStudent();
+		count = std.size();
+		
+		return count;
+	}
 
 }
