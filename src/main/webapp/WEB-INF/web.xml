@@ -70,6 +70,12 @@
   	<description></description>
   	<servlet-class>com.admin.servlet.DeleteQuestionServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>InstructionServlet</servlet-name>
+  	<display-name>InstructionServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.student.servlet.InstructionServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AdminLogin</servlet-name>
   	<url-pattern>/AdminLogin</url-pattern>
@@ -113,5 +119,9 @@
   <servlet-mapping>
   	<servlet-name>DeleteQuestionServlet</servlet-name>
   	<url-pattern>/DeleteQuestionServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>InstructionServlet</servlet-name>
+  	<url-pattern>/InstructionServlet</url-pattern>
   </servlet-mapping>
 </web-app>

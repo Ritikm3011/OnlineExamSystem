@@ -83,6 +83,13 @@ public class AdminDao {
 
 		return examList;
 	}
+	
+	public int countActiveExam() {
+		int count = 0;
+		List<Exam> examList = getActiveExam();
+		count = examList.size();
+		return count;
+	}
 
 	public int totalActiveExam() {
 		int count = 0;
