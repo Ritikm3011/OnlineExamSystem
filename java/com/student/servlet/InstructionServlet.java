@@ -47,6 +47,7 @@ public class InstructionServlet extends HttpServlet {
 
 			if (agree.equals("on")) {
 				response.getWriter().print(agree + "\n" + examId);
+				response.sendRedirect("student/exam.jsp?exam_id=" + examId);
 			} else {
 				session.setAttribute("failMsg", "Agree on term & condition");
 				response.sendRedirect("insturction.jsp?exam_id=" + examId);

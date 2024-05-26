@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-secondary">
 	<div class="container-fluid">
-		<a class="navbar-brand" href="../index.jsp">ExamShala</a>
+		<a class="navbar-brand" href="#"><%=exam.getName() %></a>
 		<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 			data-bs-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"

@@ -20,6 +20,7 @@
 		<mapping class="com.entity.Student"/>
 		<mapping class="com.entity.Exam"/>
 		<mapping class="com.entity.Question"/>
+		<mapping class="com.entity.CheckQuestion"/>
 	
 		
 	
