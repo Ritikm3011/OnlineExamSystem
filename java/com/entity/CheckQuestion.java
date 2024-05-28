@@ -22,6 +22,8 @@ public class CheckQuestion {
 	private String correctOption;
 	private String studentOption;
 	private double marks;
+	@ManyToOne
+	private Result result;
 
 	public CheckQuestion() {
 		super();
@@ -29,7 +31,7 @@ public class CheckQuestion {
 	}
 
 	public CheckQuestion(int checkId, Student student, Question question, Exam exam, String status,
-			String correctOption, String studentOption, double marks) {
+			String correctOption, String studentOption, double marks, Result result) {
 		super();
 		this.checkId = checkId;
 		this.student = student;
@@ -39,12 +41,11 @@ public class CheckQuestion {
 		this.correctOption = correctOption;
 		this.studentOption = studentOption;
 		this.marks = marks;
+		this.result = result;
 	}
-	
-	
 
 	public CheckQuestion(Student student, Question question, Exam exam, String status, String correctOption,
-			String studentOption, double marks) {
+			String studentOption, double marks, Result result) {
 		super();
 		this.student = student;
 		this.question = question;
@@ -53,6 +54,7 @@ public class CheckQuestion {
 		this.correctOption = correctOption;
 		this.studentOption = studentOption;
 		this.marks = marks;
+		this.result = result;
 	}
 
 	public int getCheckId() {
@@ -119,6 +121,15 @@ public class CheckQuestion {
 		this.marks = marks;
 	}
 
+	public Result getResult() {
+		return result;
+	}
+
+	public void setResult(Result result) {
+		this.result = result;
+	}
+
+	
 	
 
 }

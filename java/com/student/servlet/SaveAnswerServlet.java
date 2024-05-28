@@ -15,6 +15,7 @@ import com.db.FactoryProvider;
 import com.entity.CheckQuestion;
 import com.entity.Exam;
 import com.entity.Question;
+import com.entity.Result;
 import com.entity.Student;
 
 public class SaveAnswerServlet extends HttpServlet {
@@ -46,42 +47,40 @@ public class SaveAnswerServlet extends HttpServlet {
 			throws ServletException, IOException {
 
 		HttpSession seession = request.getSession();
-		
+
 		ExamDao dao = new ExamDao(FactoryProvider.getSessionFactory());
 
 		int examId = Integer.parseInt(request.getParameter("exam_id"));
+		int resultId = Integer.parseInt(request.getParameter("result_id"));
 		int questionId = Integer.parseInt(request.getParameter("question_id"));
 		int questionIndex = Integer.parseInt(request.getParameter("question_index"));
 		String studentOption = request.getParameter("answer");
 		String action = request.getParameter("action");
 		Student student = (Student) request.getSession().getAttribute("studentObj");
 		String status = "attempted";
-	//	String correctOption = dao.getCorrectOptionByQuestionId(questionId);
-		
+		// String correctOption = dao.getCorrectOptionByQuestionId(questionId);
+		if (studentOption == null) {
+			status = "not_attempted";
+		}
 
 		Question question = dao.getQuestionObject(questionId);
 		Exam exam = dao.getExamObject(examId);
-		
+		Result result = dao.getResultObject(resultId);
+
 		String correctOption = question.getCorrectAnswer();
 		double positiveMarks = exam.getPositiveMarks();
 		double negativeMarks = exam.getNegativeMarks();
-		
-		double marks = dao.getMark(correctOption, studentOption, positiveMarks, negativeMarks);
 
-		CheckQuestion checkQuestion = new CheckQuestion(student, question, exam, status, correctOption, studentOption, marks);
+		double marks = dao.getMark(correctOption, studentOption,status, positiveMarks, negativeMarks);
+
+		CheckQuestion checkQuestion = new CheckQuestion(student, question, exam, status, correctOption, studentOption, marks, result);
 		boolean f = dao.saveStudentAnswer(checkQuestion);
 
-		
-		
-
-        if ("next".equals(action)) {
-            response.sendRedirect("student/exam.jsp?exam_id=" + examId + "&q=" + (questionIndex + 1));
-        } else if ("submit".equals(action)) {
-            response.sendRedirect("student/submit.jsp?exam_id=" + examId);
-        }
-		
-		
-		
+		if ("next".equals(action)) {
+			response.sendRedirect("student/exam.jsp?exam_id=" + examId + "&q=" + (questionIndex + 1)+ "&result_id=" + resultId);
+		} else if ("submit".equals(action)) {
+			response.sendRedirect("ExamSubmitServlet?exam_id=" + examId +"&result_id=" + resultId);
+		}
 
 	}
 

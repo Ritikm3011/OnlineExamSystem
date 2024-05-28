@@ -8,6 +8,7 @@ import org.hibernate.query.Query;
 import com.entity.CheckQuestion;
 import com.entity.Exam;
 import com.entity.Question;
+import com.entity.Result;
 
 public class ExamDao {
 
@@ -101,15 +102,53 @@ public class ExamDao {
 		return correctOption;
 	}
 
-	public double getMark(String correctOption, String studentOption, double positveMark, double negativeMarks) {
+	public double getMark(String correctOption, String studentOption, String status, double positveMark,
+			double negativeMarks) {
 		double marks = 0.0;
-
-		if (correctOption.equals(studentOption)) {
-			marks = positveMark;
+		if (status.equals("attempted")) {
+			if (correctOption.equals(studentOption)) {
+				marks = positveMark;
+			} else {
+				marks = -(negativeMarks);
+			}
 		} else {
-			marks = -(negativeMarks);
+			marks = 0.0;
 		}
+
 		return marks;
 
+	}
+	public boolean createResult(Result result) {
+		boolean f = false;
+		try {
+			session = factory.openSession();
+			txn = session.beginTransaction();
+
+			session.save(result);
+			txn.commit();
+			f = true;
+			session.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.createResult");
+		}
+		return f;
+		
+	}
+	public Result getResultObject(int resultId) {
+		Result result = null;
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Result where resultId =: id");
+			query.setParameter("id", resultId);
+			result = (Result) query.uniqueResult();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.getResultObject");
+		}
+		
+		return result;
 	}
 }

@@ -16,6 +16,7 @@
 <%@include file="../component/all_css_js.jsp"%>
 <%
 int examId = Integer.parseInt(request.getParameter("exam_id"));
+int resultId = Integer.parseInt(request.getParameter("result_id"));
 AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
 Exam exam = dao.getExamById(examId);
 int questionIndex = request.getParameter("q") != null ? Integer.parseInt(request.getParameter("q")) : 0;
@@ -30,7 +31,7 @@ Question currentQuestion = questions.get(questionIndex);
 	<%@include file="exam_navbar.jsp"%>
 
 
-	<div class="container-fluid">
+	<div class="container-fluid p-3 m-3">
 
 		<div class="row mt-3 pt-3">
 			<div class="col-md-8">
@@ -53,6 +54,7 @@ Question currentQuestion = questions.get(questionIndex);
                             <input type="hidden" name="exam_id" value="<%= examId %>">
                             <input type="hidden" name="question_id" value="<%= currentQuestion.getQuestionId() %>">
                             <input type="hidden" name="question_index" value="<%= questionIndex %>">
+                            <input type="hidden" name="result_id" value="<%= resultId %>">
 
                             <div class="mt-3">
                                 <% if (questionIndex > 0) { %>

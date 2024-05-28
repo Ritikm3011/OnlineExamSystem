@@ -82,6 +82,12 @@
   	<description></description>
   	<servlet-class>com.student.servlet.SaveAnswerServlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>ExamSubmitServlet</servlet-name>
+  	<display-name>ExamSubmitServlet</display-name>
+  	<description></description>
+  	<servlet-class>com.student.servlet.ExamSubmitServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
   	<servlet-name>AdminLogin</servlet-name>
   	<url-pattern>/AdminLogin</url-pattern>
@@ -133,5 +139,9 @@
   <servlet-mapping>
   	<servlet-name>SaveAnswerServlet</servlet-name>
   	<url-pattern>/SaveAnswerServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+  	<servlet-name>ExamSubmitServlet</servlet-name>
+  	<url-pattern>/ExamSubmitServlet</url-pattern>
   </servlet-mapping>
 </web-app>
