@@ -1,5 +1,7 @@
 package com.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
@@ -118,6 +120,7 @@ public class ExamDao {
 		return marks;
 
 	}
+
 	public boolean createResult(Result result) {
 		boolean f = false;
 		try {
@@ -128,14 +131,15 @@ public class ExamDao {
 			txn.commit();
 			f = true;
 			session.close();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("problem in ExamDao.createResult");
 		}
 		return f;
-		
+
 	}
+
 	public Result getResultObject(int resultId) {
 		Result result = null;
 		try {
@@ -143,10 +147,94 @@ public class ExamDao {
 			Query query = session.createQuery("from Result where resultId =: id");
 			query.setParameter("id", resultId);
 			result = (Result) query.uniqueResult();
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println("problem in ExamDao.getResultObject");
+		}
+
+		return result;
+	}
+
+	public int attemptedQuestion(int resultId) {
+		long x = 0;
+		int attemptedQuestion = 0;
+
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery(
+					"select count(cq) from CheckQuestion cq where cq.result.resultId = :rId and cq.status = :st");
+			query.setParameter("rId", resultId);
+			query.setParameter("st", "attempted");
+			x = (long) query.uniqueResult();
+			attemptedQuestion = (int) x;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.attemptedQuestion");
+		}
+
+		return attemptedQuestion;
+
+	}
+
+	public double scoredMarks(int resultId) {
+		double scoredMarks = 0.0;
+		try {
+			session = factory.openSession();
+			Query query = session
+					.createQuery("select sum(cq.marks) from CheckQuestion cq where cq.result.resultId = :rId");
+			query.setParameter("rId", resultId);
+			scoredMarks = (double) query.uniqueResult();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.scoredMarks");
+		}
+
+		return scoredMarks;
+	}
+	
+	public boolean sumbitExam(int resultId, String submitTime, int attemptedQuestion, double scoredMarks) {
+		boolean f = false;
+		try {
+			session = factory.openSession();
+			txn = session.beginTransaction();
+			
+			Query query = session.createQuery("update Result set scoredMarks = :scoredMarks, submitTime = :submitTime, attemptedQuestion = :attemptedQuestion where resultId = :rId");
+			query.setParameter("scoredMarks", scoredMarks);
+			query.setParameter("submitTime", submitTime);
+			query.setParameter("attemptedQuestion", attemptedQuestion);
+			query.setParameter("rId", resultId);
+			int result = query.executeUpdate();
+			txn.commit();
+			session.close();
+			if(result == 1) {
+				f = true;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.sumbitExam");
+		}
+		
+		return f;
+	}
+	
+	
+	public Result getResult(int resultId) {
+		Result result = null;
+		
+		try {
+			session = factory.openSession();
+			Query query = session.createQuery("from Result where resultId =: id");
+			query.setParameter("id", resultId);
+			result = (Result) query.uniqueResult();
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("problem in ExamDao.getResult");
 		}
 		
 		return result;

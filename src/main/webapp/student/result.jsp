@@ -1,3 +1,5 @@
+<%@page import="com.entity.Result"%>
+<%@page import="com.dao.ExamDao"%>
 <%@page import="com.entity.Question"%>
 <%@page import="com.entity.Exam"%>
 <%@page import="java.util.List"%>
@@ -18,6 +20,10 @@
 int examId = Integer.parseInt(request.getParameter("exam_id"));
 AdminDao dao = new AdminDao(FactoryProvider.getSessionFactory());
 Exam exam = dao.getExamById(examId);
+
+int resultId =Integer.parseInt(request.getParameter("result_id"));
+ExamDao examDao = new ExamDao(FactoryProvider.getSessionFactory());
+Result result = examDao.getResult(resultId);
 %>
 
 
@@ -33,18 +39,18 @@ Exam exam = dao.getExamById(examId);
 
 					<div class="card-body">
 
-						<form action="#" method="post">
+					
 							
 							<p>Exam : <%=exam.getName()%></p>
-							<p>Total Question : <%=dao.getTotalQuestionByExamId(examId) %></p>
+							<p>Total Question : <%=result.getTotalQuestion() %></p>
 							
-							<p>Attempted Question : </p>
+							<p>Attempted Question : <%=result.getAttemptedQuestion() %></p>
 							
-							
+							<p>Total Marks: <%=result.getTotalMarks() %> </p>
+							<p>Scored Marks: <%=result.getScoredMarks() %></p>
 
-							<button type="submit" class="btn btn-primary">Submit</button>
-						</form>
-
+							<a href="student_home.jsp" type="submit" class="btn btn-primary">Go to Home</a>
+						
 
 					</div>
 
